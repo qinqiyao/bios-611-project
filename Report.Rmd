@@ -1,0 +1,19 @@
+---
+title: "Report"
+author: "Qiyao Qin"
+date: "10/13/2022"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 2
+    df_print: kable
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Just a picture
+
+![Picture 1](figures/promotion_sex.png)
+
