@@ -32,18 +32,18 @@ The data set used in this project is about employee promotion from Kaggle (https
 First run the following command to create suitable docker image.
 
 ```
-docker image build -t 611-hwk .
+docker image build -t 611-project .
 ```
 
 And we can run docker container using the following command.
 
 ```
-docker run -v $(pwd):/home/rstudio -e PASSWORD=qiyaoqin -p 8787:8787 -t 611-hwk
+docker run -v $(pwd):/home/rstudio -e PASSWORD=qiyaoqin -p 8787:8787 -t 611-project
 ```
 
 ### Using Makefile to generate all the stuff
 
-We can use the following command to clean the previous data and files.
+We can use the following command to clean the previous data and files, then we can run following commands to produce pictures, classification model, shiny website and final report.
 
 ```
 make clean
@@ -69,10 +69,11 @@ make figures/promotion_no_of_trainings.png
 
 <img src="pics/promotion_avg_training_score.png" alt="image-20211129161438136" style="zoom:25%;" />
 
-#### 2. Build the random forest model of promotion prediction with its ROC curve on test data using the following command:
+#### 2. Build the random forest model of promotion prediction with its ROC curve and LIME plot on test data using the following command:
 
 ```makefile
 make figures/roc.png
+make figures/lime.png
 ```
 
 #### 3. Make the final pdf report using the following command:
