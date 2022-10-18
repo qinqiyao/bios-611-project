@@ -43,7 +43,7 @@ docker run -v $(pwd):/home/rstudio -e PASSWORD=qiyaoqin -p 8787:8787 -t 611-proj
 
 ### Using Makefile to generate all the stuff
 
-We can use the following command to clean the previous data and files, then we can run following commands to produce pictures, classification model, shiny website and final report.
+We can use the following command to clean the previous data and files, then we can run other commands to produce pictures, classification model, shiny website and final report.
 
 ```
 make clean
