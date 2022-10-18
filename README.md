@@ -65,9 +65,9 @@ make figures/promotion_no_of_trainings.png
 
 **Examples:**
 
-<img src="figures/promotion_age.png" alt="image-20211129161438136" style="zoom:25%;" />
+<img src="pics/promotion_age.png" alt="image-20211129161438136" style="zoom:25%;" />
 
-<img src="figures/promotion_avg_training_score.png" alt="image-20211129161438136" style="zoom:25%;" />
+<img src="pics/promotion_avg_training_score.png" alt="image-20211129161438136" style="zoom:25%;" />
 
 #### 2. Build the random forest model of promotion prediction with its ROC curve on test data using the following command:
 
