@@ -43,7 +43,7 @@ docker run -v $(pwd):/home/rstudio -e PASSWORD=qiyaoqin -p 8787:8787 -t 611-hwk
 
 ### Using Makefile to generate all the stuff
 
-We can use the following command to clean the previous data.
+We can use the following command to clean the previous data and files.
 
 ```
 make clean
