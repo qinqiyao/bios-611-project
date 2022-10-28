@@ -79,7 +79,7 @@ make figures/lime.png
 #### 3. Make the final pdf report using the following command:
 
 ```makefile
-make eport.pdf
+make report.pdf
 ```
 
 #### 4. Use shiny to build employee promotion evaluation system using following command:
