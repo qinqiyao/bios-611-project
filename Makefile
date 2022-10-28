@@ -15,7 +15,7 @@ train_dat.csv figures/roc.png figures/lime.png model/randomforest.rds: model.R d
 	Rscript model.R
 
 report.pdf: Report.Rmd figures/promotion_sex.png
-	Rscript -e "rmarkdown::render('report.Rmd')"
+	Rscript -e "rmarkdown::render('Report.Rmd')"
 
 shiny: app.R model/randomforest.rds data_split/train_dat.csv
 	Rscript -e 'library(methods); shiny::runApp("app.R", launch.browser = TRUE)'
