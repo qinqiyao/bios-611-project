@@ -29,7 +29,7 @@ The data set used in this project is about employee promotion from Kaggle (https
 
 ### Using docker to make life easier
 
-First run the following command to create suitable docker image.
+First run the following command to create suitable docker image. (M1 or M2 Mac isn't able to build this docker container)
 
 ```
 docker image build -t 611-project .
@@ -38,7 +38,7 @@ docker image build -t 611-project .
 And we can run docker container using the following command.
 
 ```
-docker run -v $(pwd):/home/rstudio -e PASSWORD=qiyaoqin -p 8787:8787 -t 611-project
+docker run -v $(pwd):/home/rstudio -e PASSWORD=qiyaoqin -p 8787:8787 -p 8080:8080 -t 611-project
 ```
 
 ### Using Makefile to generate all the stuff
@@ -87,6 +87,8 @@ make report.pdf
 ```makefile
 make shiny
 ```
+
+Then you can open the shiny website on [localhost:8080](http://localhost:8080).
 
 **Examples:**
 
