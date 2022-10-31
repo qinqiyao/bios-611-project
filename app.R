@@ -22,7 +22,7 @@ rm(list = ls())
 
 
 mod <- readRDS("model/randomforest.rds")
-dat <- read.csv("data_split/train_dat.csv")[,c(-1,-12)]
+dat <- read.csv("data_train/train_dat.csv")[,c(-1,-12)]
 dat$education <- as.factor(dat$education)
 dat$department <- as.factor(dat$department)
 dat$gender <- as.factor(dat$gender)

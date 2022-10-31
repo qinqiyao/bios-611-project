@@ -26,7 +26,7 @@ set.seed(0)
 train_index = caret::createDataPartition(dat$employee_id, times = 1, p = 0.7, list = FALSE)
 dat_train0 = dat[dat$employee_id%in%train_index[,1],]
 dat_train0 <- dat_train0[,c(-1,-3,-14)]
-write.csv(dat_train0,"data_split/train_dat.csv")
+write.csv(dat_train0,"data_train/train_dat.csv")
 # Combination of over-sampling minority examples and under-sampling majority examples 
 # with the resampling from the rare class probability of 0.5
 dat_train <- ovun.sample(is_promoted~.,data=dat_train0,method="both",p=0.5,N=19352*2,seed=0)$data
