@@ -51,7 +51,10 @@ make clean
 
 #### 1. Get the plots of relations between promotion and other variables using the following commands:
 
+
 ```makefile
+make visualization
+# Or we can use following commands:
 make figures/promotion_sex.png
 make figures/promotion_department.png
 make figures/promotion_education.png
