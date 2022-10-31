@@ -1,4 +1,4 @@
-FROM rocker/verse 
+FROM rocker/verse:4.1
 RUN R -e "install.packages(\"tidyverse\")"
 RUN R -e "install.packages(\"MASS\")"
 RUN R -e "install.packages(\"caret\")"
