@@ -1,10 +1,11 @@
 ---
-title: "Report"
+title: "Final Report of BIOS 611 - Employee Promotion Evaluation Analysis"
 author: "Qiyao Qin"
-date: "10/13/2022"
+date: "`r Sys.Date()`"
 output:
   pdf_document:
     toc: true
+    number_sections: true
     toc_depth: 2
     df_print: kable
 ---
@@ -13,7 +14,192 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Just a picture
+# Introduction
 
-![Picture 1](figures/promotion_sex.png)
+## Research Background
 
+Nowadays, employee promotion is of great significance for both company and employees, since this will directly impact the efficiency and performance of the organization. One of the greatest challenges in employee promotion is to identify the right person for promotion and prepare him/her in time.
+
+In the promotion process, the company should first identify a set of employees based on recommendations or past performance. Selected employees go through the separate training and evaluation program. At the end of the program, based on the evaluations of various factors, the final promotions can be announced, which means that this may lead to delay in transition to new roles. Hence, company does need help in identifying the eligible candidates at a particular checkpoint so that they can expedite the entire promotion cycle.
+
+Besides, for employees, promotions are quite important to their career development. However, most of employees know little about what they can do at a specific point in time to get a promotion chance. Thus, it's of great necessity to analyze the main factors will impact their career promotion and what the most important factors are for them to get the promotion.
+
+## Research Aim
+
+On the one hand, I plan to predict whether a potential candidate at checkpoint in the test set will be promoted or not after the evaluation process to help company recognize the brilliant employees quickly.
+
+On the other hand, I intend to develop a system for employees to see the factors impacting their promotions at any time to help them know what they should do to improve their career development.
+
+# Data Description
+
+## Variables Description
+
+The data set is about employee promotion from Kaggle (\url{https://www.kaggle.com/datasets/arashnic/hr-ana}). It consists of 13 variables including employee_id, department, region, education, gender, recruitment_channel, no_of_trainings, age, previous_year_rating, length_of_service, awards_won, avg_training_score and is_promoted. And is_promoted is the target variable. The detailed features' descriptions are as follows:
+
+-   employee_id: Unique ID for employee
+
+-   department: Department of employee
+
+-   region: Region of employment
+
+-   education: Education Level
+
+-   gender: Gender of Employee
+
+-   recruitment_channel: Channel of recruitment for employee
+
+-   no_of_trainings: Number of other trainings completed in previous year on skills etc.
+
+-   age: Age of Employee
+
+-   previous_year_rating: Employee rating for the previous year
+
+-   length_of_service: Length of service in years
+
+-   awards_won: If awards won during previous year then 1 else 0
+
+-   avg_training_score: Average score in current training evaluations
+
+-   is_promoted: If recommended for promotion then 1 else 0
+
+## Data Visualization
+
+Firstly, we can analyze the probable impacting factors by visualization. Limited by the required number of words, only parts of plots revealing relationships among variables in this data set are shown in this report.
+
+
+```{r,warning=FALSE,comment=NA,echo=FALSE,fig.align='center',fig.width=3,fig.height=3,message=FALSE,fig.cap="Promotion and Sex"}
+library(tidyverse)
+library(MASS)
+library(dplyr)
+library(ggplot2)
+library(RColorBrewer)
+library(viridis)
+library(ggridges)
+
+dat <- read.csv("data_original/train.csv")
+dat <- data.frame(dat,number=1:nrow(dat))
+dat <- na.omit(dat)
+dat <- dat[dat$education%in%c("Bachelor's","Below Secondary","Master's & above"),]
+dat$education <- as.factor(dat$education)
+dat$department <- as.factor(dat$department)
+dat$gender <- as.factor(dat$gender)
+dat$recruitment_channel <- as.factor(dat$recruitment_channel)
+a2 <- data.frame(summarise(group_by(dat,is_promoted,gender),length(gender)))
+x <- as.table(matrix(a2[,3],nrow = 2, byrow = TRUE))
+dimnames(x) <- list(c("Promotion", "Non-Promotion"),c("Female","Male"))
+names(dimnames(x)) <- c( "Promotion","Sex")
+fourfoldplot(x,color=brewer.pal(5,"Blues"))
+dat$is_promoted[dat$is_promoted==1] <- "Promotion"
+dat$is_promoted[dat$is_promoted==0] <- "Non-Promotion"
+Promotion <- factor(dat$is_promoted)
+```
+
+From Figure 1 which is the four-fold plot between sex and whether an employee promoted, we can see that the proportion of female is smaller than male's. And we can further conclude that male employees are more likely to have promotion chances than female employees.   
+
+
+```{r,warning=FALSE,comment=NA,echo=FALSE,fig.align='center',message=FALSE,fig.width=6,fig.height=3,fig.cap="Promotion and Recruitment Channel"}
+p1 <- ggplot(data=dat,aes(x=recruitment_channel,fill=Promotion))
+p1 <- p1 + geom_bar(position='fill')+ coord_flip()+theme(panel.border = element_blank(),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),axis.line = element_line(colour = "black"))+ theme_classic()+scale_fill_brewer(palette="Blues")+xlab("Recruitment Channel")+ylab("Frequency")
+p1
+```
+
+
+Meanwhile, we can find that the proportion of promoted employees who are recruited by others referring is much larger than other two recruitment channels in Figure 2, which indicates that employees with referral recruitment channel have greater chance to be promoted. 
+
+
+```{r,warning=FALSE,comment=NA,echo=FALSE,fig.align='center',message=FALSE,fig.width=5,fig.height=4,fig.cap="Promotion and Whether won awards"}
+dat$awards_won. [dat$awards_won. ==1] <- "Yes"
+dat$awards_won. [dat$awards_won. ==0] <- "No"
+dat$awards_won. <- as.factor(dat$awards_won.)
+mosaicplot(~is_promoted+awards_won.,data=dat,color=brewer.pal(5,"Blues"),main ='',xlab="Promotion",ylab="If won awards")
+```
+
+Besides, mosaic plot above shows that employees with awards before are more likely to have promotion chances. And following box plot reveals that the more average training score one employee obtain, the more probability of promotion the employee will have.
+
+
+```{r,warning=FALSE,comment=NA,echo=FALSE,fig.align='center',message=FALSE,fig.width=3,fig.height=3,fig.cap="Promotion and Average Training Score"}
+p1 <- ggplot(data=dat, varwidth=T,aes(x=Promotion,y=avg_training_score,group=Promotion)) + geom_boxplot(col='sky blue',fill='light blue',varwidth=T)+ theme_bw() + theme(panel.border = element_blank(),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),axis.line = element_line(colour = "black"))+xlab("Promotion")+ylab("Average Training Score")
+p1
+```
+
+
+\newpage
+
+# Statistical Model
+
+## Random Forest Model
+
+After analyzing data roughly by visualization, statistical model is needed to further complete the research aim. Random forest model, consisting of a large number of individual decision trees that operate as an ensemble, is used in this report to predict employee promotion. Each individual tree in the random forest model spits out a class prediction and the class with the most votes becomes our model’s prediction.
+
+```{r,warning=FALSE,comment=NA,echo=FALSE,fig.align='center',message=FALSE,fig.width=5,fig.height=3,fig.cap="Importance of Top 5 Variables"}
+library(tidyverse)
+library(MASS)
+library(dplyr)
+library(lime)
+library(vip)
+set.seed(0)
+fit_rf = readRDS("model/randomforest.rds")
+vip(fit_rf, num_features = 5, bar = FALSE,aesthetics = list(color = "sky blue", fill = "light blue"))
+```
+
+
+Firstly, I split data into training and testing sets. Since the data is imbalanced, I used a combination of over-sampling minority examples and under-sampling majority examples with the re-sampling from the rare class probability of 0.5 for training data. After fitting the model by R, we can get Figure 5 showing the most important variables for this model and following accuracy-related statistics based on testing data. Lastly, we can plot ROC curve based on testing data with the AUC of 0.72, which also illustrates that this random forest model works well.
+
+|   **Statistics**  | **Value** |
+|:-----------------:|:---------:|
+|      Accuracy     |    0.91   |
+|    Sensitivity    |    0.69   |
+|    Specificity    |    0.93   |
+| Balanced Accuracy |    0.81   |
+: Accuracy-related Statistics
+
+
+## LIME Algorithm
+
+LIME stands for Local Interpretable Model-agnostic Explanations. It is a method for explaining predictions of Machine Learning models, developed by Marco Ribeiro in 2016. 
+
+```{r,warning=FALSE,comment=NA,echo=FALSE,fig.align='center',message=FALSE,fig.width=8,fig.height=4,fig.cap="LIME Plots"}
+library(lime)
+fit_rf = readRDS("model/randomforest.rds")
+dat_train = read.csv("data_train/train_dat.csv")[,-1]
+dat <- read.csv("data_original/train.csv")
+dat <- data.frame(dat,number=1:nrow(dat))
+dat <- na.omit(dat)
+dat <- dat[dat$education%in%c("Bachelor's","Below Secondary","Master's & above"),]
+dat$education <- as.factor(dat$education)
+dat$department <- as.factor(dat$department)
+dat$gender <- as.factor(dat$gender)
+dat$recruitment_channel <- as.factor(dat$recruitment_channel)
+dat$awards_won.[dat$awards_won.==0] <- "No"
+dat$awards_won.[dat$awards_won.==1] <- "Yes"
+dat$awards_won. <- as.factor(dat$awards_won.)
+dat$is_promoted[dat$is_promoted==0] <- "Non-Promotion"
+dat$is_promoted[dat$is_promoted==1] <- "Promotion"
+dat$is_promoted <- factor(dat$is_promoted,levels=c("Promotion","Non-Promotion"))
+train_index = caret::createDataPartition(dat$employee_id, times = 1, p = 0.7, list = FALSE)
+#table(dat_train$is_promoted)
+dat_test = dat[-train_index[,1],]
+dat_test <- dat_test[,c(-1,-3,-14)]
+explanation <- lime(dat_train,fit_rf)
+e <- lime::explain(dat_test[c(1,5),],explanation,n_labels = 1,n_features=5)
+plot_features(e)
+```
+
+After choosing the machine learning model (random forest model) and a reference point to be explained, LIME generates points all over the $\mathbb{R}^p$ space and predicts the Y coordinate of the sampled points using the random forest model. Then, it will assign weights based on the closeness to the chosen point by Gaussian kernel and train linear ridge regression on the generated weighted data set. Then, the coefficients in this regression model are regarded as LIME explanation, which generates following LIME plots for each new sample. LIME ensures that we can explain the importance of variables to the promotion result of each employee individually.
+
+# Employee Promotion Evaluation System
+
+Based on Section 3, I set up an online employee promotion evaluation system by shiny. One can input information of each employee, and the system will output relative prediction results as a LIME plot, which can perfectly accomplish research aim in Section 1 without requiring users to understand statistics or programming.
+
+![Online Employee Promotion Evaluation System](./pics/shiny2.png)
+
+# Reference
+
+
+[1] Wright, M. N. & Ziegler, A. (2017). ranger: A fast implementation of random forests for high dimensional data in C++ and R. J Stat Softw 77:1-17. doi: 10.18637/jss.v077.i01.
+
+[2] Sandri, M. & Zuccolotto, P. (2008). A bias correction algorithm for the Gini variable importance measure in classification trees. J Comput Graph Stat, 17:611-628. doi: 10.1198/106186008X344522.
+
+[3] Ribeiro, M.T., Singh, S., Guestrin, C., 2016. “ Why should I trust you?” Explaining the predictions of any classifier. SIGKDD
+
+[4] Visani, G., Bagli, E., Chesani, F., 2020. OptiLIME: Optimized LIME Explanations for Diagnostic Computer Algorithms. AIMLAI Workshop @ CIKM
