@@ -70,9 +70,9 @@ make figures/promotion_no_of_trainings.png
 
 **Examples:**
 
-<img src="pics/promotion_age.png" alt="image-20211129161438136" style="zoom:1%;" />
+<img src="pics/promotion_age.png" alt="image-20211129161438136" style="zoom:-10%;" />
 
-<img src="pics/promotion_avg_training_score.png" alt="image-20211129161438136" style="zoom:1%;" />
+<img src="pics/promotion_avg_training_score.png" alt="image-20211129161438136" style="zoom:-10%;" />
 
 #### 2. Build the random forest model of promotion prediction with importance of variables plot on train data, ROC curve on test data and an example LIME plot using the following command:
 
