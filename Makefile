@@ -14,7 +14,7 @@ visualization figures/promotion_sex.png figures/promotion_department.png figures
 data_train/train_dat.csv figures/roc.png figures/lime.png model/randomforest.rds: model.R data_original/train.csv
 	Rscript model.R
 
-report.pdf: Report.Rmd
+report.pdf: Report.Rmd model/randomforest.rds data_train/train_dat.csv data_original/train.csv
 	Rscript -e 'rmarkdown::render("Report.Rmd")'
 
 shiny: app.R model/randomforest.rds data_train/train_dat.csv

@@ -46,8 +46,13 @@ ui <- fluidPage(
       text-align:center;
     }"
     ),
+    tags$head(
+      tags$style(
+        ".title {text-align:center;}"
+      )
+    ),
     # Application title
-    titlePanel("Employee Promotion Evaluation System"),
+    tags$div(class="title", titlePanel("Employee Promotion Evaluation System")),
     p(class = "first-p", "Welcome to Employee Promotion Evaluation System! Please wait a minute for the model results."),
     
     # Sidebar with a slider input for age
