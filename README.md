@@ -41,6 +41,8 @@ And we can run docker container using the following command.
 docker run -v $(pwd):/home/rstudio -e PASSWORD=qiyaoqin -p 8787:8787 -p 8080:8080 -t 611-project
 ```
 
+Then, we need to use the RStudio Server with the username of "rstudio" and the password of "qiyaoqin".
+
 ### Using Makefile to generate all the stuff
 
 We can use the following command to clean the previous data and files, then we can run other commands to produce pictures, classification model, shiny website and final report.
@@ -82,7 +84,7 @@ make figures/lime.png
 #### 3. Make the final pdf report using the following command:
 
 ```makefile
-make report.pdf
+make Report.pdf
 ```
 
 #### 4. Use shiny to build employee promotion evaluation system using following command:
