@@ -74,14 +74,14 @@ make figures/promotion_no_of_trainings.png
 
 <img src="pics/promotion_avg_training_score.png" alt="image-20211129161438136" style="zoom:25%;" />
 
-#### 2. Build the random forest model of promotion prediction with its ROC curve and LIME plot on test data using the following command:
+#### 2. Build the random forest model of promotion prediction with its ROC curve and an example LIME plot on test data using the following command:
 
 ```makefile
 make figures/roc.png
 make figures/lime.png
 ```
 
-#### 3. Make the final pdf report using the following command:
+#### 3. Make the final report in pdf format using the following command:
 
 ```makefile
 make Report.pdf
