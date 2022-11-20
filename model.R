@@ -38,7 +38,7 @@ rm(dat)
 fit_rf = ranger(formu, data = dat_train, num.trees = 500, mtry = NULL,importance = "impurity")
 
 png(filename = "figures/randomforest_importance.png")
-vip(fit_rf, num_features = 5, bar = FALSE)
+vip(fit_rf, num_features = 5, bar = FALSE,aesthetics = list(color = "sky blue", fill = "light blue"))
 dev.off()
 
 explanation <- lime(dat_train,fit_rf)
