@@ -41,7 +41,7 @@ And we can run docker container using the following command.
 docker run -v $(pwd):/home/rstudio -e PASSWORD=qiyaoqin -p 8787:8787 -p 8080:8080 -t 611-project
 ```
 
-Then, we need to use the RStudio Server with the username of "rstudio" and the password of "qiyaoqin".
+Then, we need to use the [RStudio Server (http://localhost:8787)](http://localhost:8787) with the username of "rstudio" and the password of "qiyaoqin".
 
 ### Using Makefile to generate all the stuff
 
@@ -94,7 +94,7 @@ make Report.pdf
 make shiny
 ```
 
-Then you can open the shiny website on [localhost:8080](http://localhost:8080).
+Then you can open the shiny website on [http://localhost:8080](http://localhost:8080).
 
 **Examples:**
 
