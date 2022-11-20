@@ -9,7 +9,7 @@ Created by **Qiyao Qin** for course BIOS 611 at UNC.
 * To **predict whether a potential candidate at checkpoint in the test set will be promoted or not** after the evaluation process to help company recognize the brilliant employees quickly;
 * To **develop a system for employees to see the factors impacting their promotions at any time** to help them know what they should do to improve their career development.
 
-The data set used in this project is about employee promotion from Kaggle (https://www.kaggle.com/datasets/arashnic/hr-ana). It consists of **13 variables** including **employee_id**, **department**, **region**, **education**, **gender**, **recruitment_channel**, **no_of_trainings**, **age**, **previous_year rating**, **length_of_service**, **awards_won**, **avg_training_score** and **is_promoted**. And is promoted is the target variable. The detailed features’ descriptions are as follows:
+The data set used in this project is about employee promotion from [Kaggle (HR Analytics: Employee Promotion Data)](https://www.kaggle.com/datasets/arashnic/hr-ana). It consists of **13 variables** including **employee_id**, **department**, **region**, **education**, **gender**, **recruitment_channel**, **no_of_trainings**, **age**, **previous_year rating**, **length_of_service**, **awards_won**, **avg_training_score** and **is_promoted**. And is promoted is the target variable. The detailed features’ descriptions are as follows:
 
 1. employee_id: Unique ID for employee
 2. department: Department of employee
