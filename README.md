@@ -70,9 +70,9 @@ make figures/promotion_no_of_trainings.png
 
 **Examples:**
 
-<center><img src="pics/promotion_age.png" width="60%;" height="60%;" /><center>
+<center><img src="pics/promotion_age.png" width="80%;" height="80%;" /></center>
 
-<center><img src="pics/promotion_avg_training_score.png" width="60%;" height="60%;" /><center>
+<center><img src="pics/promotion_avg_training_score.png" width="80%;" height="80%;" /></center>
 
 #### 2. Build the random forest model of promotion prediction with importance of variables plot on train data, ROC curve on test data and an example LIME plot using the following command:
 
@@ -98,6 +98,6 @@ Then you can open the shiny website on [http://localhost:8080](http://localhost:
 
 **Examples:**
 
-<img src="pics/shiny1.png" alt="image-20211129161438136" />
+<img src="pics/shiny1.png" />
 
-<img src="pics/shiny2.png" alt="image-20211129161438136" />
+<img src="pics/shiny2.png" />
