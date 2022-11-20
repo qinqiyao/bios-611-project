@@ -82,6 +82,10 @@ make figures/roc.png
 make figures/lime.png
 ```
 
+**Example (importance of variables plot) :**
+
+<div align=center><img src="pics/randomforest_importance.png" width="90%;" height="90%;" /></div>
+
 #### 3. Make the final report in pdf format using the following command:
 
 ```makefile
